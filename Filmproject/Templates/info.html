@@ -1,0 +1,80 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block metadescription %}
+
+        {{ movie.description|truncatewords:155 }}
+
+{% endblock %}
+
+{% block content %}
+    {% if genre %}
+        {{genre.title}}
+    {% endif %}
+<style>
+  .comment-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 250px; /* Set a maximum height */
+    overflow: auto; /* Enable vertical scrolling */
+    margin-bottom:25px;
+  }
+
+  .comment-box {
+    width: calc(33.33% - 20px); /* Adjust as needed */
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    color:black;
+    background-color: #f9f9f9;
+  }
+
+  .comment-box p {
+    margin: 5px 0;
+  }
+</style>
+<div class="row my_prod_row_class" style="padding-top:100px;padding-bottom:100px;">
+    <div class="mx_auto" style="color:white;margin:15px;">
+        <h6><a href="{% url 'Filmapp:allFilms'%}" style="text-decoration:none;color:yellow;">Home</a> | <a href="{{movie.genre.get_url}}" style="text-decoration:none;color:black;">{{movie.genre}}</a>|{{movie.title}}</h6>
+    </div>
+    <div class="container">
+<br>
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-4 text-center">
+        <div class="img_info">
+            <img  src="{{movie.poster.url}}" alt="{{movie.title}}" style="
+            height:450px;
+            border-radius: 20px;
+            border:5px solid white;"
+            >
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+        <h1 class="my_prod_title">{{movie.title}}</h1>
+        <p>{{movie.actors}}</p>
+        <p class="my_title">Movie Description:</p>
+        <p class="text-justify my_prod_text">{{movie.description}}</p>
+        <p class="my_title">Released Date:</p>
+        <p class="text-justify my_prod_text">{{movie.release_date}}</p>
+        <p>Trailer :- <a style="text-decoration:none;" href="{{ movie.trailer_link }}"> Watch now..</a></p>
+        <a style="text-decoration:none;" href="{% url 'user:movie_reviews' genre_slug=movie.genre.slug movie_slug=movie.slug %}"><h2 style="color:white;">Reviews:-<span style="font-size:25px;color:blue;"> view...</span> </h2> </a>
+
+        <div class="comment-container">
+          {% for review in reviews %}
+            <div class="comment-box">
+              <p>{{ review.review_text }}</p>
+              <p>Rating: {{ review.rating }}</p>
+              <p>By: {{ review.user.username }}</p>
+            </div>
+          {% endfor %}
+        </div>
+<a
+        style="background-color:
+               black;padding:10px;
+               border-radius:10px;
+               text-decoration:none;
+               color:yellow;" href="{% url 'user:add_review' movie_slug=movie.slug %}">Add Reviews</a>
+</div>
+</div>
+</div>
+{% endblock %}

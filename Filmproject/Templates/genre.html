@@ -1,0 +1,89 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block metadescription %}
+    {% if genre %}
+        {{ genre.description|truncatewords:155 }}
+    {% else %}
+        Welcome to Filmy Cinema Review web app where you can review movies
+    {% endif %}
+{% endblock %}
+
+{% block title %}
+    Filmy
+        {% if genre %}
+            <div>
+                <h1 style="padding-top:4rem; text-align:center;">Genre: {{genre.title}}</h1>
+                <h1>{{genre.title}} - Filmy -</h1>
+                    See our new Collections - Filmy -
+        {%endif%}
+            </div>
+{%endblock%}
+
+{% block content %}
+<div class="container" style="padding-top:100px;">
+    {% if genre %}
+        <div>
+            <div class="row my_row_class">
+                <div class="mx-auto">
+                    <h3>{{ genre.title }}:-</h3><br>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% for msg in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>Welcome, </strong><h6 style="color:green;">{{msg}}</h6>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    {% endfor %}
+    <div class="row">
+        {% for film in films.object_list %}
+            <div class="col-6 col-md-3 mb-4">
+                <div class="card h-100" style="width: 90%; height:435px">
+                    <a href="{{ film.get_url }}">
+                        <img src="{{ film.poster.url }}" class="card-img-top" alt="{{ film.title }}" style="height:220px;width:100%;padding:10px;">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ film.title }}</h5>
+                        <p class="card-text"><b>Actors: </b>{{ film.actors }}</p>
+                        <p class="card-text"><b>Genre: </b>{{ film.genre }}</p>
+                        <p class="card-text"><b>Released: </b>{{ film.release_date }}</p>
+                        <p>Trailer Link: <a class="movie-info-link" href="{{ film.trailer_link }}">- watch now</a></p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="mx_auto" style="padding-bottom:100px;">
+        {% if films.paginator.num_pages > 1 %}
+
+        <hr>
+        <div class="text-center">
+            {% for pg in films.paginator.page_range %}
+                <a href="?page={{pg}}" class="btn btn-light btn-sm {% if film.number == pg %} active {% endif %}">{{pg}}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+<!--<div class="col-md-3">-->
+<!--        {% for film in films %}-->
+<!--        <div class="">-->
+<!--                <div class="card"  >-->
+<!--                    <a href="{{film.get_url}}"><img  src="{{film.poster.url}}" alt="{{film.title}}" style="height:400px;width:350px;padding:5px;"></a>-->
+<!--                    <div class="card-body">-->
+<!--                        <h1>{{film.title}}</h1>-->
+<!--                        <h6><b>Actors: </b>{{film.actors}}</h6>-->
+<!--                        <h6>{{film.genre}}</h6>-->
+<!--                        <h6><b>Description: </b>{{film.description}}</h6>-->
+<!--                        <p><b>Released: </b>{{film.release_date}}</p>-->
+<!--                        <div class="movie-info-link">-->
+<!--                            <p>Trailer Link:<a class="movie-info-link" href="{{film.trailer_link}}">Click here</a></p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            {% endfor %}</div>-->
+<!--        </div>-->

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+    We have nothing here to provide.
+
+{% endblock %}
+{% block title %}
+    Search
+{% endblock %}
+{% block content %}
+<div style="padding-top:100px;">
+    <p class="text-center my_search_text">You have searched for :<b>{{query}}</b></p>
+</div>
+<div class="container">
+    <div class="row mx_auto">
+        {% for film in films %}
+        <div class="col-6 col-md-3 mb-4">
+             <div class="card h-100" style="width: 90%; height:435px">
+                    <a href="{{ film.get_url }}">
+                        <img src="{{ film.poster.url }}" class="card-img-top" alt="{{ film.title }}" style="height:220px;width:100%;padding:10px;">
+                    </a>
+                 <div class="card-body">
+                <h5 class="card-title">{{ film.title }}</h5>
+                <p class="card-text"><b>Actors: </b>{{ film.actors }}</p>
+                <p class="card-text"><b>Genre: </b>{{ film.genre }}</p>
+                <p class="card-text"><b>Released: </b>{{ film.release_date }}</p>
+                <p>Trailer Link: <a class="movie-info-link" href="{{ film.trailer_link }}">- watch now</a></p>
+                 </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="row mx_auto">
+            <p class="text-center my_search_text"> 0 results found</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

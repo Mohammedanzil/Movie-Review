@@ -1,0 +1,123 @@
+body{
+font-family: 'Roboto', sans-serif;
+height:100%;
+background-image: url("https://img.freepik.com/premium-photo/clapper-board-movie-slate-with-black-yellow-color-film-roll-yellow-background-it-is-used-video-production-film-industry_335640-1078.jpg");
+background-size:100%;
+color:white;
+    }
+/*** navbar ***/
+
+.nav-item {
+    padding-left:10px;
+    letter-spacing: 0.2em;
+    font-size:14px;
+    text-transform:uppercase;
+
+
+    }
+.dropdown-item{
+    letter-spacing: 0.2em;
+    font-size:14px;
+    text-transform:uppercase;
+    }
+
+/*** footer ***/
+
+.my_footer{
+    background-color:black;
+    height:60px;
+    color:white;
+    }
+
+.my_footer p{
+    padding-top:20px;
+    font-size:14px;
+
+    }
+
+/*** genre ***/
+
+.my_row_class{
+    padding-top:15px;
+
+    }
+.my_row_class .mx_auto{
+    color:#000;
+    font-size:12px;
+    }
+
+.my_image{
+    width:100%;
+    padding:5px;
+    }
+
+.my_title{
+    font-size:16px;
+    text_transform:uppercase;
+    letter-spacing:0.2rem;
+    }
+.my_image_padding{
+    padding:5px;
+
+    }
+.my_bottom_margin{
+    margin-bottom:10px;
+    }
+.card-body h4{
+    font-size:14px;
+    text_transform:uppercase;
+    letter-spacing:0.2rem;
+    }
+.movie-info-link{
+text-decoration:none;
+}
+
+/*** film page ***/
+.my_prod_row_class{
+    padding-top:15px;
+   background-color:rgb(0,0,20,0.2);
+}
+.my_prod_row_class .mx_auto{
+    color:#000;
+    font-size:12px;
+    text-decoration:none;
+}
+.my_prod_title{
+    font-size:20px;
+    font-weight: bolder;
+    text-transform:uppercase;
+    letter-spacing:1.5em;
+    padding-top:15px;
+    padding-bottom:10px;
+}
+.my_prod_text{
+    padding-right:20px;
+}
+.my_search_text{
+    padding-top:20px;
+}
+.img_info{
+    border:5px solid white;
+    border-radius:10px;
+    background: white;
+    margin-left:80px;
+       }
+/***Cart page***/
+
+.my_custom_table{
+    min-width:400px;
+    font-size:14px;
+}
+.my_custom_thead{
+    font-weight:normal;
+    text_transform:uppercase;
+    letter-spacing:0.2em;
+    background-color:#f8f8fa!important;
+}
+.custom_a{
+    text_decoration:none;
+    color:#868e96 !important;
+}
+.my_custom_button{
+    margin-top:5px;
+}

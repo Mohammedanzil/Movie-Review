@@ -1,0 +1,130 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://img.freepik.com/premium-photo/clapper-board-movie-slate-with-black-yellow-color-film-roll-yellow-background-it-is-used-video-production-film-industry_335640-1078.jpg");
+            margin: 0;
+            padding: 0;
+            background-size:100%;
+            color:white;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            border: 5px solid;
+            padding: 10px;
+            background-color: transparent;
+            backdrop-filter: blur(20px);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .user-info {
+            margin-bottom: 20px;
+        }
+        .user-info p {
+            margin: 5px 0;
+            font-size:25px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn-success{
+            background-color: #196F3D;
+        }
+        .btn:hover {
+            background-color: #000;
+            color:yellow;
+        }
+        table {
+          width: 100%;
+          border:transparent;
+        }
+
+        th, td {
+          padding: 8px;
+          border-radius:5px;
+          text-align: left;
+          border: 1px solid #ddd;
+        }
+
+        th {
+          background-color: #000;
+          padding: 8px;
+          text-align: left;
+        }
+        td{
+          padding: 8px;
+          border: 1px solid #ddd;
+          background-color: #333;
+        }
+        button{
+          color:white;
+          background-color:red;
+          padding:10px;
+          border-radius:10px;
+          border:none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="mx_auto">
+    <h5><a class="btn" href="{% url 'Filmapp:allFilms'%}" style="text-decoration:none;background-color:red;">Back to Home</a></h5>
+</div>
+        <h1 style="color:white;">User Profile</h1>
+        <div class="user-info">
+            <p>Username: {{ user.username }}</p>
+            <p>Email: {{ user.email }}</p>
+            <p>First Name: {{ user.first_name }}</p>
+            <p>Last Name: {{ user.last_name }}</p>
+            <h2>Movies Added by :- {{ user.username }}</h2>
+            <table>
+              <tr>
+                <th>Title</th>
+                <th>Release Date</th>
+                <th>Actors</th>
+                <th>Want to delete</th>
+                <!-- Add more table headers as needed -->
+              </tr>
+              {% for movie in user_movies %}
+              <tr>
+                <td>{{ movie.title }}</td>
+                <td>{{ movie.release_date }}</td>
+                <td>{{ movie.actors }}</td>
+                <td>
+                  <form  action="{% url 'user:delete_movie' genre_slug=movie.genre.slug movie_slug=movie.slug %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                  </form>
+                </td>
+                <!-- Add more table cells as needed -->
+              </tr>
+              {% endfor %}
+            </table>
+        </div>
+        <a class="btn" href="./add_movie">Add movie</a>
+
+        <a class="btn btn-success" href="{% url 'user:edit_profile' %}">Edit Profile</a>
+    </div>
+</body>
+</html>
+
